@@ -47,20 +47,26 @@ class AuthController extends ApiController
             if ($user->type == 1) {
                 $phone = $user->people->phone;
                 $address = $user->people->address;
+                $names = $user->people->names;
+                $surnames = $user->people->surnames;
             } else {
                 $phone = $user->therapist->phone;
                 $address = $user->therapist->address;
+                $names = $user->therapist->names;
+                $surnames = $user->therapist->surnames;
             }
 
             $auth = [
                 'id' => $user->id,
-                'fullName' => 'Fernando Cruz Banegas',
+                'fullName' => $names.' '.$surnames,
+                'names' => $names,
+                'surnames' => $surnames,
                 'username' => $user->name,
-                // 'status' => $user->status == 1 ? 'Activo' : 'Inactivo',
+                'status' => $user->status == 1 ? 'Activo' : 'Inactivo',
                 'email' => $user->email,
-                // 'address' => $address,
-                // 'phone' => $phone,
-                'role' => $role ? $role->name : 'invitado'
+                'address' => $address,
+                'phone' => $phone,
+                'role' => $role ? $role->name : 'Invitado'
             ];
 
             $data = [
