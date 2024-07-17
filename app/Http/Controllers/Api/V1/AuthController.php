@@ -39,6 +39,14 @@ class AuthController extends ApiController
 
             $token  = $user->createToken('auth_token')->plainTextToken;
             $role = $user->roles->first();
+            $permissions = $role ? $role->permissions->map(function ($permission) {
+                $parts = explode('.', $permission->name);
+                return [
+                    'action' => $parts[1] ?? null,
+                    'subject' => $parts[0] ?? null,
+                ];
+            }) : [];
+
             if ($user->avatar) {
                 $imagenBase64 = base64_encode(Storage::disk('public')->get('users-avatar/' . $user->avatar));
             } else {
@@ -66,6 +74,7 @@ class AuthController extends ApiController
                 'email' => $user->email,
                 'address' => $address,
                 'phone' => $phone,
+                'type' => $user->type,
                 'role' => $role ? $role->name : 'Invitado'
             ];
 
@@ -75,7 +84,7 @@ class AuthController extends ApiController
                 'userData' => $auth,
                 'avatar' => $imagenBase64,
                 // 'userAbilityRules' => [['action' => 'index', 'subject' => 'Home'], ['action' => 'index', 'subject' => 'People']]
-                'userAbilityRules' => [['action' => 'manage', 'subject' => 'all']]
+                'userAbilityRules' => $permissions
             ];
 
             return $this->respond($data, 200);

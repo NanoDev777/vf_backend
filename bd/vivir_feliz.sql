@@ -103,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
 -- Dumping data for table vivir_feliz.model_has_roles: ~0 rows (approximately)
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-	(1, 'App\\Models\\User', 1);
+	(1, 'App\\Models\\User', 1),
+	(3, 'App\\Models\\User', 2);
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.password_resets
@@ -247,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `people` (
 /*!40000 ALTER TABLE `people` DISABLE KEYS */;
 INSERT INTO `people` (`id`, `names`, `surnames`, `ci`, `email`, `phone`, `address`, `status`, `user_id`, `city_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'Jorge', 'Banegas', '8914345', 'nano@gmail.com', '72115369', 'La Guardia', 1, 1, 1, '2024-05-28 09:28:03', '2024-05-28 09:28:03', NULL),
-	(2, 'Carlos', 'Morales', '7707814', 'carlos@gmail.com', '68945278', 'La Villa', 1, 3, 1, '2024-05-28 09:28:32', '2024-05-28 09:28:32', NULL),
+	(2, 'Carlos', 'Morales', '7707814', 'carlos@gmail.com', '68945278', 'La Villa', 1, 2, 1, '2024-05-28 09:28:32', '2024-05-28 09:28:32', NULL),
 	(12, 'Freddy Gabriel', 'Banegas Montaño', '8963547', 'mino@gmail.com', '72115478', 'Barrio 8 de diciembre', 1, 16, 1, '2024-06-07 20:14:51', '2024-06-07 20:14:51', NULL),
 	(13, 'Hugo', 'Vam Damme', '5695302', 'hugo@gmail.com', '3546298', 'Barrio 8 de Diciembre', 1, 17, 2, '2024-06-19 15:19:30', '2024-06-19 16:19:44', NULL),
 	(14, 'Jose', 'Saravia Mendoza', '7852369', 'jose@gmail.com', '77065789', 'California', 1, 18, 2, '2024-06-19 16:20:34', '2024-06-19 16:20:42', NULL),
@@ -263,10 +264,24 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table vivir_feliz.permissions: ~0 rows (approximately)
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+	(1, 'Patient.index', 'api', '2024-07-17 15:13:50', '2024-07-17 15:13:50'),
+	(2, 'Patient.store', 'api', '2024-07-17 15:14:08', '2024-07-17 15:14:08'),
+	(3, 'Patient.update', 'api', '2024-07-17 15:14:52', '2024-07-17 15:14:53'),
+	(4, 'Patient.delete', 'api', '2024-07-17 15:15:08', '2024-07-17 15:15:09'),
+	(5, 'People.index', 'api', '2024-07-17 15:15:41', '2024-07-17 15:15:43'),
+	(6, 'People.store', 'api', '2024-07-17 15:15:54', '2024-07-17 15:15:54'),
+	(7, 'People.update', 'api', '2024-07-17 15:16:46', '2024-07-17 15:16:46'),
+	(8, 'People.delete', 'api', '2024-07-17 15:17:01', '2024-07-17 15:17:02'),
+	(9, 'Therapist.index', 'api', '2024-07-17 15:17:28', '2024-07-17 15:17:28'),
+	(10, 'Therapist.store', 'api', '2024-07-17 15:17:47', '2024-07-17 15:17:47'),
+	(11, 'Therapist.update', 'api', '2024-07-17 15:19:49', '2024-07-17 15:19:49'),
+	(12, 'Therapist.delete', 'api', '2024-07-17 15:20:04', '2024-07-17 15:20:04'),
+	(13, 'MyPatient.index', 'api', '2024-07-17 16:38:36', '2024-07-17 16:38:37');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.personal_access_tokens
@@ -284,9 +299,9 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.personal_access_tokens: ~78 rows (approximately)
+-- Dumping data for table vivir_feliz.personal_access_tokens: ~74 rows (approximately)
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 	(1, 'App\\Models\\User', 1, 'auth_token', '24e559bcc909479b24d486e92c3847577cf74243895b18af0f4ec69400b3a3c7', '["*"]', NULL, NULL, '2024-05-24 16:43:43', '2024-05-24 16:43:43'),
@@ -366,7 +381,21 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 	(75, 'App\\Models\\User', 1, 'auth_token', 'a38fd7ada4e60bbee3c3a6d621942000ab7d5554f8937a0db1a595a589a5b725', '["*"]', NULL, NULL, '2024-07-05 19:02:31', '2024-07-05 19:02:31'),
 	(76, 'App\\Models\\User', 1, 'auth_token', 'edf37481049bd68a7603c3eab921f3347ddaef9eec8550c1c2f8b4026cb36600', '["*"]', NULL, NULL, '2024-07-05 19:38:04', '2024-07-05 19:38:04'),
 	(77, 'App\\Models\\User', 1, 'auth_token', '8141396d64378a6ca49dd7402cee197413fbd36408ba056ba90e8403a3f14f6c', '["*"]', '2024-07-05 21:25:11', NULL, '2024-07-05 20:39:14', '2024-07-05 21:25:11'),
-	(78, 'App\\Models\\User', 1, 'auth_token', '2e4902892b21908cb30cb972a29c91d1fc2aefcd4253d81ac79bdd74d1898b99', '["*"]', '2024-07-05 21:26:36', NULL, '2024-07-05 21:26:16', '2024-07-05 21:26:36');
+	(78, 'App\\Models\\User', 1, 'auth_token', '2e4902892b21908cb30cb972a29c91d1fc2aefcd4253d81ac79bdd74d1898b99', '["*"]', '2024-07-05 21:26:36', NULL, '2024-07-05 21:26:16', '2024-07-05 21:26:36'),
+	(79, 'App\\Models\\User', 1, 'auth_token', '7bbaef1ecb298a7ff2433dc32de2704c05723fcae9098b51989a7e430f93117c', '["*"]', '2024-07-16 20:18:10', NULL, '2024-07-11 17:53:10', '2024-07-16 20:18:10'),
+	(80, 'App\\Models\\User', 1, 'auth_token', 'f14ba2bfea548e42cff0de7ebd337e9cadc708fbda17d58ba9423db9008fdfa7', '["*"]', NULL, NULL, '2024-07-16 20:47:48', '2024-07-16 20:47:48'),
+	(81, 'App\\Models\\User', 1, 'auth_token', '4ba5900dd16bf711d04033a9d25980329dbd15ac2ca2b26e842cf88fb1f830b7', '["*"]', NULL, NULL, '2024-07-16 21:26:42', '2024-07-16 21:26:42'),
+	(82, 'App\\Models\\User', 2, 'auth_token', '6500f9d91540e030d0796f772e8f397764ceaae9cbac4da6c05e48df1bc088d7', '["*"]', NULL, NULL, '2024-07-17 15:54:08', '2024-07-17 15:54:08'),
+	(83, 'App\\Models\\User', 2, 'auth_token', '353b13dfd81f7dbab3b491ac10b029413db653dba0fe6439a531ebf03d5cf6de', '["*"]', NULL, NULL, '2024-07-17 15:54:46', '2024-07-17 15:54:46'),
+	(84, 'App\\Models\\User', 2, 'auth_token', '84de2010bf59c74b3d773ba05d07de14b60828273ab1be051c4a7eeafc4f00f1', '["*"]', NULL, NULL, '2024-07-17 15:55:26', '2024-07-17 15:55:26'),
+	(85, 'App\\Models\\User', 2, 'auth_token', 'bb9c5c2eeaf00b23973ce9c182052057d224c67d20c3d6dd30f4f0676566762f', '["*"]', '2024-07-17 15:56:34', NULL, '2024-07-17 15:55:56', '2024-07-17 15:56:34'),
+	(86, 'App\\Models\\User', 2, 'auth_token', '82851c05eb94923fbc75b6c38aa2129553a3803a709ce598cdd90e2bd469c40d', '["*"]', NULL, NULL, '2024-07-17 15:56:58', '2024-07-17 15:56:58'),
+	(87, 'App\\Models\\User', 2, 'auth_token', '4b627a00afe71333ae6c1da2fb055d7bcc75db9bb78183bbf6471170fd7f6b44', '["*"]', NULL, NULL, '2024-07-17 16:15:59', '2024-07-17 16:15:59'),
+	(88, 'App\\Models\\User', 2, 'auth_token', 'ff7f8388598f8ccf4cf62365d271ecba16c7b547da7e9908a97c291c048ab08c', '["*"]', NULL, NULL, '2024-07-17 21:02:28', '2024-07-17 21:02:28'),
+	(89, 'App\\Models\\User', 1, 'auth_token', '8fdae108f12a984ec4be8a5867944211e1f878fed88355610df70ce5b96d584d', '["*"]', NULL, NULL, '2024-07-17 21:05:28', '2024-07-17 21:05:28'),
+	(90, 'App\\Models\\User', 2, 'auth_token', '0f0d8a769df72b1eea6e90497b5e27edc833a6dc7a6c0b14d986bfd92037dbec', '["*"]', NULL, NULL, '2024-07-17 21:10:08', '2024-07-17 21:10:08'),
+	(91, 'App\\Models\\User', 2, 'auth_token', '70272bd4261bb201536d2f71be6d753fb8a770a11a6665753ac06da072aaf779', '["*"]', NULL, NULL, '2024-07-17 21:12:31', '2024-07-17 21:12:31'),
+	(92, 'App\\Models\\User', 2, 'auth_token', '77395344de74ef75d3fa071dbfaec7453fbd0b1f76ee5ef686ed99d4f2eb2cd1', '["*"]', NULL, NULL, '2024-07-17 21:45:32', '2024-07-17 21:45:32');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.professions
@@ -407,12 +436,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table vivir_feliz.roles: ~1 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrador', 'api', '2024-07-03 14:10:46', '2024-07-03 14:10:46');
+	(1, 'Administrador', 'api', '2024-07-03 14:10:46', '2024-07-03 14:10:46'),
+	(2, 'Secretaria', 'api', '2024-07-17 15:33:15', '2024-07-17 15:33:15'),
+	(3, 'Invitado', 'api', '2024-07-17 16:40:16', '2024-07-17 16:40:16');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.role_has_permissions
@@ -427,6 +458,20 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 
 -- Dumping data for table vivir_feliz.role_has_permissions: ~0 rows (approximately)
 /*!40000 ALTER TABLE `role_has_permissions` DISABLE KEYS */;
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+	(1, 2),
+	(2, 2),
+	(3, 2),
+	(4, 2),
+	(5, 2),
+	(6, 2),
+	(7, 2),
+	(8, 2),
+	(9, 2),
+	(10, 2),
+	(11, 2),
+	(12, 2),
+	(13, 3);
 /*!40000 ALTER TABLE `role_has_permissions` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.schools
@@ -534,8 +579,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table vivir_feliz.users: ~7 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `status`, `type`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'nano', 'nano@gmail.com', '2024-05-24 12:43:19', '$2a$12$GXhnrHvi6o5htGn9gw0RC.36nOmV0o0FMqy7vabynEatuVf4El7tq', 1, 1, '1720214796.png', NULL, '2024-05-24 12:43:22', '2024-07-05 21:26:36'),
-	(2, 'mono', 'mono@gmail.com', '2024-05-28 09:27:19', '$2a$12$1BeUHyRRfOM6KpxxySwBrOd/RWYFfhwxy4GhJTSFMnVcq1lxa7rqS', 1, 2, NULL, NULL, '2024-05-28 09:27:22', '2024-05-28 09:27:22'),
+	(1, 'nano', 'nano@gmail.com', '2024-05-24 12:43:19', '$2a$12$GXhnrHvi6o5htGn9gw0RC.36nOmV0o0FMqy7vabynEatuVf4El7tq', 1, 1, '1720727406.png', NULL, '2024-05-24 12:43:22', '2024-07-11 19:50:06'),
+	(2, 'mono', 'mono@gmail.com', '2024-05-28 09:27:19', '$2a$12$GXhnrHvi6o5htGn9gw0RC.36nOmV0o0FMqy7vabynEatuVf4El7tq', 1, 1, NULL, NULL, '2024-05-28 09:27:22', '2024-05-28 09:27:22'),
 	(3, 'fernando', 'fernando@gmail.com', '2024-05-28 09:27:34', '$2a$12$1BeUHyRRfOM6KpxxySwBrOd/RWYFfhwxy4GhJTSFMnVcq1lxa7rqS', 1, 2, NULL, NULL, '2024-05-28 09:27:36', '2024-05-28 09:27:37'),
 	(16, '8963547', 'mino@gmail.com', NULL, '$2y$10$7qtzDzetBIjVa0mGUOpkY.fyChiNrvC0Y/.sG/3D7u/toQWISSOu2', 1, 2, NULL, NULL, '2024-06-07 20:14:51', '2024-06-07 20:14:51'),
 	(17, '5695302', 'hugo@gmail.com', NULL, '$2y$10$cn2cvwCxG/Cq4M.5CS832OOJSV44Ua.k0OAecltb25AWyhcAvEK32', 1, 2, NULL, NULL, '2024-06-19 15:19:30', '2024-06-19 15:19:30'),
