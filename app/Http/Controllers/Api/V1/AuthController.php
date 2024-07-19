@@ -84,7 +84,7 @@ class AuthController extends ApiController
                 'userData' => $auth,
                 'avatar' => $imagenBase64,
                 // 'userAbilityRules' => [['action' => 'index', 'subject' => 'Home'], ['action' => 'index', 'subject' => 'People']]
-                'userAbilityRules' => $permissions
+                'userAbilityRules' => $role->name == 'Administrador' ? [['action' => 'manage', 'subject' => 'all']] : $permissions
             ];
 
             return $this->respond($data, 200);
