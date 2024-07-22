@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.model_has_roles: ~0 rows (approximately)
+-- Dumping data for table vivir_feliz.model_has_roles: ~2 rows (approximately)
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 1),
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
   CONSTRAINT `patients_school_id_foreign` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.patients: ~66 rows (approximately)
+-- Dumping data for table vivir_feliz.patients: ~67 rows (approximately)
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
 INSERT INTO `patients` (`id`, `names`, `surnames`, `birthdate`, `course`, `phone`, `email`, `status`, `school_id`, `people_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'Alexandrea', 'Schaden', '2019-05-31', 15, '+1.747.826.3122', 'felipe.halvorson@example.net', 1, 49, 2, '2024-05-28 13:31:14', '2024-05-28 13:31:14', NULL),
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.permissions: ~0 rows (approximately)
+-- Dumping data for table vivir_feliz.permissions: ~13 rows (approximately)
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'Patient.index', 'api', '2024-07-17 15:13:50', '2024-07-17 15:13:50'),
@@ -281,7 +281,11 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(10, 'Therapist.store', 'api', '2024-07-17 15:17:47', '2024-07-17 15:17:47'),
 	(11, 'Therapist.update', 'api', '2024-07-17 15:19:49', '2024-07-17 15:19:49'),
 	(12, 'Therapist.delete', 'api', '2024-07-17 15:20:04', '2024-07-17 15:20:04'),
-	(13, 'MyPatient.index', 'api', '2024-07-17 16:38:36', '2024-07-17 16:38:37');
+	(13, 'MyPatient.index', 'api', '2024-07-17 16:38:36', '2024-07-17 16:38:37'),
+	(14, 'Home.index', 'api', '2024-07-19 15:42:50', '2024-07-19 15:42:51'),
+	(15, 'Profile.index', 'api', '2024-07-19 16:35:14', '2024-07-19 16:35:15'),
+	(16, 'MyQueries.index', 'api', '2024-07-22 17:55:46', '2024-07-22 17:55:46'),
+	(17, 'Mytreatments.index', 'api', '2024-07-22 17:56:28', '2024-07-22 17:56:28');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.personal_access_tokens
@@ -301,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.personal_access_tokens: ~74 rows (approximately)
+-- Dumping data for table vivir_feliz.personal_access_tokens: ~92 rows (approximately)
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 	(1, 'App\\Models\\User', 1, 'auth_token', '24e559bcc909479b24d486e92c3847577cf74243895b18af0f4ec69400b3a3c7', '["*"]', NULL, NULL, '2024-05-24 16:43:43', '2024-05-24 16:43:43'),
@@ -395,7 +399,43 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 	(89, 'App\\Models\\User', 1, 'auth_token', '8fdae108f12a984ec4be8a5867944211e1f878fed88355610df70ce5b96d584d', '["*"]', NULL, NULL, '2024-07-17 21:05:28', '2024-07-17 21:05:28'),
 	(90, 'App\\Models\\User', 2, 'auth_token', '0f0d8a769df72b1eea6e90497b5e27edc833a6dc7a6c0b14d986bfd92037dbec', '["*"]', NULL, NULL, '2024-07-17 21:10:08', '2024-07-17 21:10:08'),
 	(91, 'App\\Models\\User', 2, 'auth_token', '70272bd4261bb201536d2f71be6d753fb8a770a11a6665753ac06da072aaf779', '["*"]', NULL, NULL, '2024-07-17 21:12:31', '2024-07-17 21:12:31'),
-	(92, 'App\\Models\\User', 2, 'auth_token', '77395344de74ef75d3fa071dbfaec7453fbd0b1f76ee5ef686ed99d4f2eb2cd1', '["*"]', NULL, NULL, '2024-07-17 21:45:32', '2024-07-17 21:45:32');
+	(92, 'App\\Models\\User', 2, 'auth_token', '77395344de74ef75d3fa071dbfaec7453fbd0b1f76ee5ef686ed99d4f2eb2cd1', '["*"]', NULL, NULL, '2024-07-17 21:45:32', '2024-07-17 21:45:32'),
+	(93, 'App\\Models\\User', 2, 'auth_token', 'cf06870b1d5419f557c884023e090fb31633daafca531e334a8cc15c7eba28d8', '["*"]', NULL, NULL, '2024-07-19 19:43:43', '2024-07-19 19:43:43'),
+	(94, 'App\\Models\\User', 2, 'auth_token', 'd5beeaa454167a16cce815b19b8e8f31686013b59649594bd983dfb47d640ce7', '["*"]', NULL, NULL, '2024-07-19 19:44:57', '2024-07-19 19:44:57'),
+	(95, 'App\\Models\\User', 2, 'auth_token', 'a55e79039fc6eed124de542df4db9c9ea8bce8067cb99093b30444dd3be74ff5', '["*"]', NULL, NULL, '2024-07-19 20:36:18', '2024-07-19 20:36:18'),
+	(96, 'App\\Models\\User', 2, 'auth_token', '05b5149c2c1806aac0356677209711890277a55db0c2378d8da5e2fa01f398a1', '["*"]', NULL, NULL, '2024-07-19 21:07:00', '2024-07-19 21:07:00'),
+	(97, 'App\\Models\\User', 1, 'auth_token', '765a9dd6400e5cf0a0b38dfae6c43ac68800cfb3060c568d5377c9e4598441c6', '["*"]', NULL, NULL, '2024-07-19 21:12:07', '2024-07-19 21:12:07'),
+	(98, 'App\\Models\\User', 1, 'auth_token', 'bdedacdfb8027d7bc035bdac7c0a379462b0d9eb668689179a948b6710560848', '["*"]', NULL, NULL, '2024-07-19 21:36:02', '2024-07-19 21:36:02'),
+	(99, 'App\\Models\\User', 1, 'auth_token', 'e5df1731546e37f101e29b0980bb6088f271e1b9361414e5c76b776cd1d81dc3', '["*"]', NULL, NULL, '2024-07-19 21:39:33', '2024-07-19 21:39:33'),
+	(100, 'App\\Models\\User', 1, 'auth_token', '99c4193532b4e529adb46979a814d09590bc51614099864bfe54974922d358b7', '["*"]', NULL, NULL, '2024-07-19 21:41:45', '2024-07-19 21:41:45'),
+	(101, 'App\\Models\\User', 2, 'auth_token', 'a3327244262f9962334e81c169e16cb31b3addad237ef89aefb8fb268af79ee9', '["*"]', NULL, NULL, '2024-07-19 21:45:05', '2024-07-19 21:45:05'),
+	(102, 'App\\Models\\User', 2, 'auth_token', '6d493261d3ddde483fb1cba00ab7646ee3abc3db8ca123b02718ca64961ba49a', '["*"]', NULL, NULL, '2024-07-19 21:46:01', '2024-07-19 21:46:01'),
+	(103, 'App\\Models\\User', 1, 'auth_token', '618424ccb4047c003ca39500771aac384fe9b3ec19d2e37bbb968e8cb6757a89', '["*"]', NULL, NULL, '2024-07-19 21:53:10', '2024-07-19 21:53:10'),
+	(104, 'App\\Models\\User', 1, 'auth_token', '42e069b359767b691ed640f7841406c04a6a69015ab0dad0639dc0d32b6d1cbc', '["*"]', NULL, NULL, '2024-07-22 19:52:34', '2024-07-22 19:52:34'),
+	(105, 'App\\Models\\User', 2, 'auth_token', 'e954a057413ed6ac8d65e0fb5c5a5524becfc2c11571ec7cb115e43f33b439f2', '["*"]', NULL, NULL, '2024-07-22 19:53:18', '2024-07-22 19:53:18'),
+	(106, 'App\\Models\\User', 2, 'auth_token', 'bfa9d6c32551cbcfc059c0bcc2acc0965881bd706673cc11e25890a762f4e08f', '["*"]', NULL, NULL, '2024-07-22 19:53:48', '2024-07-22 19:53:48'),
+	(107, 'App\\Models\\User', 1, 'auth_token', 'efd883c7f150ad445d9480797452153aeba059b86deb774ed4709037605a0717', '["*"]', NULL, NULL, '2024-07-22 19:57:43', '2024-07-22 19:57:43'),
+	(108, 'App\\Models\\User', 2, 'auth_token', 'c16c10ae6b36804f30521b7132566779c190ca202852857c18986c9eff906126', '["*"]', NULL, NULL, '2024-07-22 19:57:58', '2024-07-22 19:57:58'),
+	(109, 'App\\Models\\User', 1, 'auth_token', '672337a82944ea1c6031c8174efecd7b9fb10ee810a1127818984f80d57021ba', '["*"]', NULL, NULL, '2024-07-22 20:04:28', '2024-07-22 20:04:28'),
+	(110, 'App\\Models\\User', 2, 'auth_token', '8d1ad534781ea45a42c5a4b7ef137281dbbe25f6d87dffbd72d3aa3a7f3ed4e3', '["*"]', NULL, NULL, '2024-07-22 20:04:57', '2024-07-22 20:04:57'),
+	(111, 'App\\Models\\User', 1, 'auth_token', 'd3117ef6cb05dc8a38b405641b31a12aee97eec0456e7858e9d06886c77bfbb0', '["*"]', NULL, NULL, '2024-07-22 20:05:47', '2024-07-22 20:05:47'),
+	(112, 'App\\Models\\User', 1, 'auth_token', '246fbf70cbef8fbfbc88b117733369b779dfbd7098c1d1192190a05b5158d69a', '["*"]', NULL, NULL, '2024-07-22 20:06:14', '2024-07-22 20:06:14'),
+	(113, 'App\\Models\\User', 2, 'auth_token', '4187a07167e4fa02bfb92a575d9b37f0fbb265739e9dc831858171c7b3d6232e', '["*"]', NULL, NULL, '2024-07-22 20:06:46', '2024-07-22 20:06:46'),
+	(114, 'App\\Models\\User', 1, 'auth_token', '77f8b657b865ebee4fc85f7cc35f9c5ddc829589b778e30f3977f9007594f2cf', '["*"]', '2024-07-22 20:09:49', NULL, '2024-07-22 20:09:37', '2024-07-22 20:09:49'),
+	(115, 'App\\Models\\User', 1, 'auth_token', '556e49c51caf3767a6c7674f6a925427750fbae4adc77c71a6ad0cdb6326f1f0', '["*"]', '2024-07-22 20:11:22', NULL, '2024-07-22 20:11:16', '2024-07-22 20:11:22'),
+	(116, 'App\\Models\\User', 1, 'auth_token', '0be6a641289b7d698044fde075b5bffe84b8170ef676d57a7a22dd186bbb5635', '["*"]', '2024-07-22 21:05:13', NULL, '2024-07-22 21:05:12', '2024-07-22 21:05:13'),
+	(117, 'App\\Models\\User', 1, 'auth_token', '644d944b1da57fcd11d1c3de8d22a0da8bcb3741af0ef492ddcc884944e0d4c5', '["*"]', NULL, NULL, '2024-07-22 21:14:08', '2024-07-22 21:14:08'),
+	(118, 'App\\Models\\User', 1, 'auth_token', '2daf5f84c5f3ad109d7d29d6afe5da6d35fc501379aab32875d9160dcde4e022', '["*"]', NULL, NULL, '2024-07-22 21:15:47', '2024-07-22 21:15:47'),
+	(119, 'App\\Models\\User', 1, 'auth_token', '95440b869ddb7de3dab5648cd0f7e0ce7bf23a3f58d22cb8e289109798d4422c', '["*"]', NULL, NULL, '2024-07-22 21:16:32', '2024-07-22 21:16:32'),
+	(120, 'App\\Models\\User', 2, 'auth_token', '827562fb252ae21d155c2459ef59f110dfd2c3aab2ce623622aa653df26f61ff', '["*"]', NULL, NULL, '2024-07-22 21:18:35', '2024-07-22 21:18:35'),
+	(121, 'App\\Models\\User', 1, 'auth_token', '9f1f98e2482a79fcb24bf1969f47646dfa3d4d3e39e63ee110b4ac8fa0268d67', '["*"]', NULL, NULL, '2024-07-22 21:19:32', '2024-07-22 21:19:32'),
+	(122, 'App\\Models\\User', 2, 'auth_token', 'e0ecde8d6c7dcb7f7669fe1249db6228c706da5265bab5757b33ac36a518c9f8', '["*"]', NULL, NULL, '2024-07-22 21:19:47', '2024-07-22 21:19:47'),
+	(123, 'App\\Models\\User', 1, 'auth_token', 'bd850c582560817aeeedd4e295217678dc5f954894abd86bcd18b2ce2990ff9e', '["*"]', '2024-07-22 21:28:32', NULL, '2024-07-22 21:25:31', '2024-07-22 21:28:32'),
+	(124, 'App\\Models\\User', 2, 'auth_token', '5f98f880e2fe5fe550ef1d907c95d2e1e6cd60f3ed1896e9455a47f20bdf6163', '["*"]', NULL, NULL, '2024-07-22 21:28:46', '2024-07-22 21:28:46'),
+	(125, 'App\\Models\\User', 1, 'auth_token', '338fd936cabc7ef03cf6ac945c037fbe4c63bb2de59f32a7c028885176db92e4', '["*"]', NULL, NULL, '2024-07-22 21:34:47', '2024-07-22 21:34:47'),
+	(126, 'App\\Models\\User', 2, 'auth_token', 'eb0744daca40f9b4e3dd310465f5c70a82f9228a4bed355a9501f141f74dcd7c', '["*"]', NULL, NULL, '2024-07-22 21:54:13', '2024-07-22 21:54:13'),
+	(127, 'App\\Models\\User', 2, 'auth_token', '6c4461a20b7de9d7c444deed6552940fa14df3747cf0f6a08b113a73cc4e6f9c', '["*"]', NULL, NULL, '2024-07-22 21:57:04', '2024-07-22 21:57:04'),
+	(128, 'App\\Models\\User', 2, 'auth_token', '07d9b65fe0732224c9a3f6eb9660ebacf9378f6f179fc859f88809cd8f3acae9', '["*"]', NULL, NULL, '2024-07-22 21:57:56', '2024-07-22 21:57:56');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.professions
@@ -438,7 +478,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.roles: ~1 rows (approximately)
+-- Dumping data for table vivir_feliz.roles: ~3 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'Administrador', 'api', '2024-07-03 14:10:46', '2024-07-03 14:10:46'),
@@ -456,7 +496,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.role_has_permissions: ~0 rows (approximately)
+-- Dumping data for table vivir_feliz.role_has_permissions: ~13 rows (approximately)
 /*!40000 ALTER TABLE `role_has_permissions` DISABLE KEYS */;
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(1, 2),
@@ -471,7 +511,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(10, 2),
 	(11, 2),
 	(12, 2),
-	(13, 3);
+	(13, 3),
+	(14, 3),
+	(15, 3),
+	(16, 3),
+	(17, 3);
 /*!40000 ALTER TABLE `role_has_permissions` ENABLE KEYS */;
 
 -- Dumping structure for table vivir_feliz.schools
@@ -484,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `schools` (
   FULLTEXT KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.schools: ~14 rows (approximately)
+-- Dumping data for table vivir_feliz.schools: ~15 rows (approximately)
 /*!40000 ALTER TABLE `schools` DISABLE KEYS */;
 INSERT INTO `schools` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(37, 'La Sierra', '2024-06-04 18:26:25', '2024-06-04 18:26:25'),
@@ -521,7 +565,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   CONSTRAINT `services_therapist_id_foreign` FOREIGN KEY (`therapist_id`) REFERENCES `therapists` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table vivir_feliz.services: ~0 rows (approximately)
+-- Dumping data for table vivir_feliz.services: ~1 rows (approximately)
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
 INSERT INTO `services` (`id`, `uuid`, `token`, `patient_id`, `therapist_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, '4e3faabe-6b62-4220-a566-8269e1858a9e', '345345345435', 72, 1, '2024-06-19 16:37:29', '2024-06-19 16:37:29', NULL);
