@@ -16,7 +16,7 @@ Route::prefix('v1')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
 
     Route::group(['middleware' => ['auth:sanctum']], function() {
-
+        Route::post('logout', [AuthController::class, 'logout']);
         //Listas
         Route::get('cities/listing', [CityController::class, 'listing']);
         Route::get('professions/listing', [ProfessionController::class, 'listing']);

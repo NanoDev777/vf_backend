@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends ApiController
 {
@@ -83,7 +84,6 @@ class AuthController extends ApiController
                 'accessToken' => $token,
                 'userData' => $auth,
                 'avatar' => $imagenBase64,
-                // 'userAbilityRules' => [['action' => 'index', 'subject' => 'Home'], ['action' => 'index', 'subject' => 'People']]
                 'userAbilityRules' => $role->name == 'Administrador' ? [['action' => 'manage', 'subject' => 'all']] : $permissions
             ];
 
